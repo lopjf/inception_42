@@ -1,13 +1,17 @@
 #!/bin/bash
 
+# listen to port 9000 instead of default one
 sed -i "s/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/" "/etc/php/7.4/fpm/pool.d/www.conf";
+# changes ownership of all files in /var/www
 chown -R www-data:www-data /var/www/*;
 chown -R 777 /var/www/*;
+# for storing runtime informations
 mkdir -p /run/php/;
 touch /run/php/php7.4-fpm.pid;
 
 #check if wp-config.php exist
 if [ ! -f /var/www/html/wp-config.php ]; then
+	# Download wordpress cli and use wp command
 	mkdir -p /var/www/html
 	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar;
 	chmod +x wp-cli.phar; 
@@ -30,7 +34,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	sed -i "s/replace_with_logged_in_key/${LOGGED_IN_SALT}/" /var/www/html/wp-config.php
 	sed -i "s/replace_with_nonce_salt/${NONCE_SALT}/" /var/www/html/wp-config.php
 
-
+	# install and set up wp with the necessary env var
 	wp core install --allow-root --url=${WP_URL} --title=${WP_TITLE} --admin_user=${WP_ADMIN_LOGIN} --admin_password=${WP_ADMIN_PASSWORD} --admin_email=${WP_ADMIN_EMAIL}
 	wp user create --allow-root ${WP_USER_LOGIN} ${WP_USER_EMAIL} --user_pass=${WP_USER_PASSWORD};
 fi

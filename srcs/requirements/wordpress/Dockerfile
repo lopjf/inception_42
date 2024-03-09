@@ -1,5 +1,6 @@
 FROM		debian:bullseye
 
+# fpm for fastcgi
 RUN			apt-get update && apt-get install -y \
 			wget \
 			php7.4 \
@@ -7,6 +8,7 @@ RUN			apt-get update && apt-get install -y \
 			php-mysqli \
 			mariadb-client
 
+# removes the package lists downloaded by apt-get update
 RUN			rm -rf /var/lib/apt/lists/*
 
 
