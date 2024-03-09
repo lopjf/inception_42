@@ -16,6 +16,7 @@ RUN service mariadb start && \
     GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO ${SQL_USER}@'%' IDENTIFIED BY '${SQL_PWD}'; \
     ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PWD}'; \
     FLUSH PRIVILEGES;" && \
+    # restart the database
     mysqladmin -u root -p$SQL_ROOT_PWD shutdown
 
 CMD ["mysqld_safe"]
