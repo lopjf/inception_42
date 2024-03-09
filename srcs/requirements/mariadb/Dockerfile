@@ -21,3 +21,22 @@ RUN service mariadb start && \
 CMD ["mysqld_safe"]
 
 EXPOSE 3306
+
+
+# Go inside database:
+
+# docker exec -it <container_id> /bin/bash
+
+# mysql -u your_username -p
+
+# To see a list of databases available:
+# SHOW DATABASES;
+
+# Select Database
+# USE my_database;
+
+# To see the tables within the selected database:
+# SHOW TABLES;
+
+# Check Table Contents
+# SELECT * FROM my_table;
