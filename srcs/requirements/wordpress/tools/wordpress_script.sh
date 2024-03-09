@@ -24,15 +24,6 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     sed -i "s/replace_with_env_user/${DB_USER}/" /var/www/html/wp-config.php
     sed -i "s/replace_with_env_password/${DB_PASSWORD}/" /var/www/html/wp-config.php
 	sed -i "s/replace_with_db_name/${DATABASE_NAME}/" /var/www/html/wp-config.php
-	
-	sed -i "s/replace_with_auth_key/${AUTH_KEY}/" /var/www/html/wp-config.php
-	sed -i "s/replace_with_secure_auth_key/${SECURE_AUTH_KEY}/" /var/www/html/wp-config.php
-	sed -i "s/replace_with_logged_in_key/${LOGGED_IN_KEY}/" /var/www/html/wp-config.php
-	sed -i "s/replace_with_nonce_key/${NONCE_KEY}/" /var/www/html/wp-config.php
-	sed -i "s/replace_with_auth_salt/${AUTH_SALT}/" /var/www/html/wp-config.php
-	sed -i "s/replace_with_secure_auth_salt/${SECURE_AUTH_SALT}/" /var/www/html/wp-config.php
-	sed -i "s/replace_with_logged_in_key/${LOGGED_IN_SALT}/" /var/www/html/wp-config.php
-	sed -i "s/replace_with_nonce_salt/${NONCE_SALT}/" /var/www/html/wp-config.php
 
 	# install and set up wp with the necessary env var
 	wp core install --allow-root --url=${WP_URL} --title=${WP_TITLE} --admin_user=${WP_ADMIN_LOGIN} --admin_password=${WP_ADMIN_PASSWORD} --admin_email=${WP_ADMIN_EMAIL}
